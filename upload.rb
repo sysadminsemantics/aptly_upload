@@ -2,12 +2,14 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/cross_origin'
-require 'ftools'
-require 'fileutils'
-require 'aptly'
 
 set :bind, '0.0.0.0'
 set :port, '9092'
+
+
+use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    [username, password] == [ '<user>', '<pass>']
+end
 
 get '/' do
   'apty_uploader_v0.1'
