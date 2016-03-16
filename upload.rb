@@ -32,6 +32,7 @@ post '/packages' do
                 f.write(chunk)
             end
         tmpfile.close
+        end
         # aptly sequence
         add_deb = `/usr/bin/aptly repo add <repo_name> <incoming_deb_path>/#{name} > /dev/null 2>&1`
         puts "#{add_deb}"
@@ -39,6 +40,5 @@ post '/packages' do
         puts "#{drop_repo}"
         publish_repo = `/usr/bin/aptly publish -passphrase="<gpg_pass_repo>" -distribution="<dist_name>" repo <repo_name> > /dev/null 2>&1`
         puts "#{publish_repo}"
-        end
         "Upload complete\n"
     end
