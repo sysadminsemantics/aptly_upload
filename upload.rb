@@ -38,7 +38,7 @@ post '/packages' do
         puts "#{add_deb}"
         drop_repo = `/usr/bin/aptly publish drop <repo_name> > /dev/null 2>&1`
         puts "#{drop_repo}"
-        publish_repo = `/usr/bin/aptly publish -passphrase="<gpg_pass_repo>" -distribution="<dist_name>" repo <repo_name> > /dev/null 2>&1`
+        publish_repo = `/usr/bin/aptly publish -batch -passphrase="<gpg_pass_repo>" -distribution="<dist_name>" repo <repo_name> > /dev/null 2>&1`
         puts "#{publish_repo}"
         "Upload complete\n"
     end
